@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:purple;
+}
+    </style>
+    <title>User Information Form</title>
+</head>
+
+<body>
+    <center>
+    <img src="alakrabhack.jpg" alt="عذرا" style="width: 500px; height: 500px;">
+     </center> 
+    <div class="container">
+        <h1>User Information Form</h1>
+        <form id="userInfoForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" required>
+
+            <label for="province">Province:</label>
+            <input type="text" id="province" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('userInfoForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const name = document.getElementById('name').value;
+    const age = document.getElementById('age').value;
+    const country = document.getElementById('country').value;
+    const province = document.getElementById('province').value;
+
+    // Create a text file with the user's name
+    const data = `Name: ${name}\nAge: ${age}\nCountry: ${country}\nProvince: ${province}`;
+    const blob = new Blob([data], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    // Create a link element to download the file
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${name}.txt`; // Name of the file
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url); // Clean up the URL object
+});
+    </script>
+</body>
+</html>
